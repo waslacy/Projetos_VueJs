@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mata Monstros</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <div class="panel scores">
+            <div class="score">
+                <h2>Player</h2>
+                <div class="hp-bar">
+                    <div class="hp" :class="{danger: playerHP <= 20}" :style="{width: playerHP + '%'}"></div>
+                </div>
+                <div>{{ playerHP }}%</div>
+            </div>
+            
+            <div class="score">
+                <h2>Monstro</h2>
+                <div class="hp-bar">
+                    <div class="hp" :class="{danger: monsterHP <= 20}" :style="{width: monsterHP + '%'}"></div>
+                </div>
+                <div>{{ monsterHP }}%</div>
+            </div>
+        </div>
+
+        <div class="panel result" v-if="hasResult">
+            <h1 v-if="playerHP == 0 && monsterHP == 0">Ué empatou??</h1>
+            <h1 class="win" v-else-if="monsterHP == 0">Você ganhou!! :D</h1>
+            <h1 v-else class="lose">Você perdeu!! RAPAAAAZZ :/</h1>
+        </div>
+
+        <div class="panel controller">
+            <template v-if="running">
+                <button class="attack" @click="attack(false)">Ataque</button>
+                <button class="especial" @click="attack(true)">Ataques Especial</button>
+                <button class="heal" @click="healAndHurt">Curar</button>
+                <button class="giveUp" @click="running = false">Desistir</button> 
+            </template>
+            <button class="newGame" v-else @click="start">Iniciar Jogo</button>
+        </div>
+
+        <div class="panel logs" v-if="logs.length">
+            <ul>
+                <li class="log" v-for="log in logs" :class="log.clss">{{ log.text }}</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
