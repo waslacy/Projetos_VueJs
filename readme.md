@@ -1,1 +1,3 @@
-# Simulador de batalha estilo pokemon feito usando as bases de VueJs
+# Meus projetos realizados em VueJs
+
+### logo logo tem mais

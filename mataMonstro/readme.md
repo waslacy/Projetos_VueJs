@@ -1,0 +1,1 @@
+# Simulador de batalha estilo pokemon feito usando as bases de VueJs
